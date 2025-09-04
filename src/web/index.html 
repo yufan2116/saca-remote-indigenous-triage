@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Indigenous Triage — Voice Input (Local Demo)</title>
+  <link rel="icon" href="assets/icon.svg">
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="app-header" role="banner">
+    <div class="brand">
+      <img class="brand__icon" src="assets/icon.svg" alt="" aria-hidden="true" />
+      <h1 class="brand__title">Indigenous Triage — Voice Input (Local Only)</h1>
+    </div>
+    <p class="brand__tag">No network calls · ML/NLP placeholders · Audio stays in-browser</p>
+  </header>
+
+  <main class="layout" role="main">
+    <section class="chat" aria-labelledby="chat-title">
+      <h2 id="chat-title" class="sr-only">Conversation</h2>
+      <div id="messages" class="chat__messages" aria-live="polite"></div>
+      <form id="chat-form" class="chat__composer" autocomplete="off">
+        <label for="textInput" class="sr-only">Type your message</label>
+        <textarea id="textInput" name="textInput" rows="2" placeholder="Type here or use the mic → then Transcribe → Send" aria-label="Message input"></textarea>
+        <div class="composer__actions">
+          <button type="button" id="btnRecord" class="btn btn--primary" aria-pressed="false" aria-label="Start recording">🎙️ Record</button>
+          <button type="button" id="btnStop" class="btn" disabled aria-label="Stop recording">⏹️ Stop</button>
+          <button type="button" id="btnTranscribe" class="btn" disabled aria-label="Transcribe audio locally">📝 Transcribe (placeholder)</button>
+          <button type="submit" class="btn btn--accent" aria-label="Send message">➡️ Send</button>
+        </div>
+        <div class="composer__meta" id="recMeta" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <aside class="side" aria-labelledby="audio-panel-title">
+      <h2 id="audio-panel-title">Audio Panel</h2>
+      <canvas id="wave" width="600" height="120" aria-label="Microphone waveform visualization"></canvas>
+
+      <div class="audio-controls">
+        <button type="button" id="btnPlay" class="btn" disabled aria-label="Play last recording">▶️ Play</button>
+        <button type="button" id="btnDownload" class="btn" disabled aria-label="Download WAV">💾 Download WAV</button>
+        <button type="button" id="btnClear" class="btn" disabled aria-label="Clear recording">🧹 Clear</button>
+      </div>
+
+      <details class="panel">
+        <summary>Local Processing (Placeholders)</summary>
+        <div class="panel__content">
+          <div class="stack">
+            <button type="button" id="btnProcess" class="btn">⚙️ Process Locally (NLP placeholder)</button>
+            <pre id="nlpOut" class="codeblock" aria-live="polite" tabindex="0">{}</pre>
+          </div>
+          <p class="hint">
+            These buttons call <code>stt.transcribeAudio()</code> and <code>nlp.runLocalNLP()</code>—
+            both are local stubs ready to be replaced by your on-device WASM models
+            (e.g., Vosk, Whisper.cpp, or custom classifiers). No data leaves the browser.
+          </p>
+        </div>
+      </details>
+
+      <details class="panel">
+        <summary>About privacy & safety</summary>
+        <div class="panel__content">
+          <ul>
+            <li>No external APIs are called by this demo.</li>
+            <li>Audio is recorded locally via <code>MediaRecorder</code> and can be exported to WAV.</li>
+            <li>Waveform uses Web Audio API only.</li>
+            <li>Medical outputs shown here are placeholders and <strong>not clinical advice</strong>.</li>
+          </ul>
+        </div>
+      </details>
+    </aside>
+  </main>
+
+  <footer class="app-footer" role="contentinfo">
+    <small>© 2025 Local-Only Demo UI · Built for on-device ML/NLP integration.</small>
+  </footer>
+
+  <script src="js/components.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/stt.js"></script>
+  <script src="js/nlp.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
